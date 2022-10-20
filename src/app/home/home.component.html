@@ -1,11 +1,27 @@
 <div class="app">
   <div class="app_container">
+
     <div class="app_container_navbar">
       <div class="app_container_navbar_items">
         <img class="app_container_navbar_items_image" [src]="logo" />
         <h1 class="app_container_navbar_items_title">LOOK AT THAT DOG!</h1>
       </div>
+    </div> <div class="modal" *ngIf="modal.showDialog">
+    <div class="modal_container">
+      <div class="modal_container_base">
+        <div class="modal_container_base_button">
+          <div class="close-container" (click)="modal.showDialog = false">
+            <div class="leftright"></div>
+            <div class="rightleft"></div>
+            <label class="close">close</label>
+          </div>
+        </div>
+        <div class="">
+          <img class="modal_container_base_image" [src]="searchPic" />
+        </div>
+      </div>
     </div>
+  </div>
     <app-dog class="app_container_base_dogie"></app-dog>
     <div class="app_container_base">
       <div class="app_container_base_dashboard">
@@ -33,6 +49,7 @@
           <div class="app_container_base_dashboard_dog_photo">
             <img
               class="app_container_base_dashboard_dog_photo_image"
+              (click)="modal.showDialog = true"
               [src]="searchPic"
             />
           </div>

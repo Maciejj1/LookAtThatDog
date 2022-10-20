@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Observable, take } from 'rxjs';
 import { Router } from '@angular/router';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-home',
@@ -10,17 +11,25 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   aler = 'Brak zdjęcia';
-  logo = 'assets/logo2.png';
+  logo = 'assets/logo.png';
   url = 'https://pl.wikipedia.org/wiki/';
   $dogs: Observable<any> | undefined;
   _dogs: String[] = [];
-  public searchPic: String = '../../assets/default.png';
-  constructor(private service: DataService, private route: Router) {}
+
+  public searchPic: String = 'assets/default.png';
+  constructor(
+    private service: DataService,
+    private route: Router,
+    public modal: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.$dogs = this.service.getListOfDogs();
   }
-
+  display = false;
+  closeModal() {
+    this.display = true;
+  }
   selectDog(): void {
     this.service.selectByDog(this._dogs).subscribe((response) => {
       if (response.status === 'success') {
