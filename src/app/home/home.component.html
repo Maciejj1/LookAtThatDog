@@ -1,0 +1,55 @@
+<div class="app">
+  <div class="app_container">
+    <div class="app_container_navbar">
+      <div class="app_container_navbar_items">
+        <img class="app_container_navbar_items_image" [src]="logo" />
+        <h1 class="app_container_navbar_items_title">LOOK AT THAT DOG!</h1>
+      </div>
+    </div>
+    <app-dog class="app_container_base_dogie"></app-dog>
+    <div class="app_container_base">
+      <div class="app_container_base_dashboard">
+        <div class="app_container_base_dashboard_information">
+          <h2 class="app_container_base_dashboard_information_text">
+            Wybierz rasę z listy by zobaczyć słodkiego pieska :)
+          </h2>
+        </div>
+        <div class="app_container_base_dashboard_list">
+          <select
+            class="app_container_base_dashboard_list_select"
+            [(ngModel)]="_dogs"
+            (ngModelChange)="selectDog()"
+          >
+            <option class="defualt-text">-- Wybierz Rasę--</option>
+            <option
+              class="defualt-text"
+              *ngFor="let dog of ($dogs | async)?.message"
+            >
+              {{ dog }}
+            </option>
+          </select>
+        </div>
+        <div class="app_container_base_dashboard_dog">
+          <div class="app_container_base_dashboard_dog_photo">
+            <img
+              class="app_container_base_dashboard_dog_photo_image"
+              [src]="searchPic"
+            />
+          </div>
+          <div class="app_container_base_dashboard_dog_information">
+            <p class="app_container_base_dashboard_dog_information_text">
+              Poczytaj więcej o tej rasie na Wikipedii:
+            </p>
+          </div>
+          <div class="app_container_base_dashboard_dog_button">
+            <a
+              class="app_container_base_dashboard_dog_button_link"
+              href="https://pl.wikipedia.org/wiki/{{ _dogs }}"
+              >{{ _dogs }}</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
